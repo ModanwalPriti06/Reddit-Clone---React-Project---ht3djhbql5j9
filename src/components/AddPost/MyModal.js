@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 
 
@@ -31,9 +31,7 @@ function MyModal({SetShow,show}) {
   return (
     <>
       <modal show={show}
-        onHide={() => SetShow(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title">
+        onHide={() => SetShow(false)}>
 
         <header closeButton>
           <title>Add New Post</title>

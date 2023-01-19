@@ -43,6 +43,15 @@ function AddPost() {
   return (
     <div>
          <div className='bg-dark'>
+         <img
+        width={60}
+        height={60}
+        alt="logo"
+        className='my-3 rounded'
+        style={{marginLeft:"10px"}}
+        src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
+      />
+    <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={home} style={{width:"8rem"}}>Home</button>
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={() => setShow(true)} style={{width:"12rem"}}>Add Post</button>
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={allpost} style={{width:"12rem"}}>All Local Post</button>
@@ -52,7 +61,7 @@ function AddPost() {
     
      {filteredData.map((e,index)=>(  
         
-            <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3" border="dark" key={index.userId}>
+            <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark" key={index.userId}>
             <div class="card-body" >
                 <h2 class="card-title" style={{color:"white"}}>{e.title}</h2>
                 <h4 class="card-text" style={{color:"white"}}>{e.description}</h4>

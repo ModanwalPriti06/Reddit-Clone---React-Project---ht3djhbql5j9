@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
 
@@ -57,9 +56,10 @@ if (isLoading) {
      
       <img
         width={60}
-        height={100}
-        alt="171x180"
+        height={60}
+        alt="logo"
         className='my-3 rounded'
+        style={{marginLeft:"10px"}}
         src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
       />
     <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
@@ -71,7 +71,7 @@ if (isLoading) {
         <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Post</h1>
         
        {data.map((post) => (
-       <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3" border="dark">
+       <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
         <div class="card-body">
             <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
             <h4 class="card-text" style={{color:"white"}}>{post.body}</h4>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-
 import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomeCopy () {
 const navigate=useNavigate();
@@ -35,7 +34,16 @@ useEffect(()=>{
   return (
     <div> 
      
-      <div className='bg-dark'>        
+      <div className='bg-dark'>  
+      <img
+        width={60}
+        height={60}
+        alt="logo"
+        className='my-3 rounded'
+        style={{marginLeft:"10px"}}
+        src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
+      />
+    <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>      
         <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={login} style={{width:"8rem"}}>Login</button>
         <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={addPost} style={{width:"12rem"}}>Add Post</button>
       </div>
@@ -43,7 +51,7 @@ useEffect(()=>{
         <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Local Post</h1>
         
        {newArray.map((post) => (
-       <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3" border="dark">
+       <div style={{ width: '25rem'}} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
         <div class="card-body">
             <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
             <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>

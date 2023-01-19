@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-
+import './login.css'
 import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
 
@@ -42,6 +42,15 @@ function homepage(){
     <div>
       
      <div className='bg-dark'>
+     <img
+        width={60}
+        height={60}
+        alt="logo"
+        className='my-3 rounded'
+        style={{marginLeft:"10px"}}
+        src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
+      />
+    <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
             
      <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={homepage} style={{width:"8rem"}}>Home</button>
         </div>
@@ -50,8 +59,8 @@ function homepage(){
       <div class="card-body">
       <form onSubmit={(e)=>{e.preventDefault()}}>
 
-      <div className="mb-3" controlId="exampleForm.ControlInput1">
-        <label className="text-white">Username</label>
+      <div className="mb-3 form-group" controlId="exampleForm.ControlInput1">
+        <label className="text-white">Username:</label>
         <input type="text" placeholder="Enter User name" value={name} onChange={(e)=>{setName(e.target.value)}}/>
       </div>
 
