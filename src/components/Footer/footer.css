@@ -1,0 +1,15 @@
+.footer{
+    height: 60px;
+    min-width: 500px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+   
+}
+p{
+    position: absolute;
+    text-align: center;
+    margin-top: 14px;
+    color: white;
+}

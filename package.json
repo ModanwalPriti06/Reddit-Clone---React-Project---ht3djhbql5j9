@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-bootstrap": "^2.7.0",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^6.7.0"
   },
   "jest": {
     "moduleNameMapper": {
