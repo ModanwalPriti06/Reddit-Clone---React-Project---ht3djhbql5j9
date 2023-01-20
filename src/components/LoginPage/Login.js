@@ -39,7 +39,7 @@ function homepage(){
   navigate('/home')
 }
   return (
-    <div>
+    <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}>
       
      <div className='bg-dark'>
      <img

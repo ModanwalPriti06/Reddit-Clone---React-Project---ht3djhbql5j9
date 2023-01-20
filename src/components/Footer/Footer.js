@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div>
         <div className='footer'>
-            <p>@copyright of Newton school design by priti mod@nwal</p>
+            <p>@copyright of Newton school designed by priti mod@nwal</p>
         </div>
     </div>
   )

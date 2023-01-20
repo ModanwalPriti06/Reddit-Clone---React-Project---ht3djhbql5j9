@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
-//import { useCallback } from 'react';
-import MyModal from './MyModal';
 import {useNavigate} from 'react-router-dom';
-
 import Footer from '../Footer/Footer';
+import Modal from './Modal';
 
 let PostArray=[];
 
+
 function AddPost() {
     const navigate=useNavigate();
-    const [show, setShow] = useState(false);
+    const [isopen,setIsOpen]=useState(false);
     const [likes,setLikes]=useState(0)
     const [dlikes,setDisLikes]=useState(0)
-
+    
     const parsed = JSON.parse(localStorage.getItem("add"));
     PostArray = Array.isArray(parsed) ? [...parsed] : [parsed]
       
     function logout(){
+      confirm("Now you are logout from this website..")
      localStorage.setItem('currentValue', JSON.stringify({...JSON.parse(localStorage.getItem('currentValue')),
       uname: ""}));
+    
       navigate('/home')
     }
     const filteredData = PostArray.filter(item => item.username === JSON.parse(localStorage.getItem("currentValue")).uname);
@@ -31,17 +32,18 @@ function AddPost() {
   }
 
     function upvote(){
-      alert("like..😍")
-      setLikes(likes+1)
+      alert("like")
+      if(JSON.parse(localStorage.getItem("add")).userId===JSON.parse(localStorage.getItem("add")).userRegNo)
+        {
+          setLikes(likes+1)
+        }
     }
     function downvote(){
       alert("Down Vote..😏")
       setDisLikes(dlikes+1)
-
     }
-
   return (
-    <div>
+    <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}>
          <div className='bg-dark'>
          <img
         width={60}
@@ -52,10 +54,10 @@ function AddPost() {
         src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
       />
     <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
-            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={home} style={{width:"8rem"}}>Home</button>
-            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={() => setShow(true)} style={{width:"12rem"}}>Add Post</button>
-            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={allpost} style={{width:"12rem"}}>All Local Post</button>
-            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={logout} style={{width:"8rem"}}>LogOut</button>
+            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={home} style={{width:"10rem"}}>Home</button>
+            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={()=>{setIsOpen(true)}} style={{width:"10rem"}}>Add Post</button>
+            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={allpost} style={{width:"10rem"}}>All Local Post</button>
+            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={logout} style={{width:"10rem"}}>LogOut</button>
         </div>
        
     
@@ -73,8 +75,9 @@ function AddPost() {
             </div>
             </div>
         ))}
-
-        {show && <MyModal SetShow={setShow} show={show}/>}
+        <Modal open={isopen} onClose={()=>setIsOpen(false)}>
+  
+        </Modal>
         <Footer/>
     </div>
   )
