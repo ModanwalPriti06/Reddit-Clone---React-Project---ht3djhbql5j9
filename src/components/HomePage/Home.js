@@ -46,6 +46,7 @@ if (isLoading) {
           navigate('/addpost');   
         }
         else{
+          alert("Sorry You are not login")
           navigate('/login');
         }  
     }

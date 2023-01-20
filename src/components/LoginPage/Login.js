@@ -61,12 +61,11 @@ function homepage(){
 
       <div className="mb-3 form-group" controlId="exampleForm.ControlInput1">
         <label className="text-white">Username:</label>
-        <input type="text" placeholder="Enter User name" value={name} onChange={(e)=>{setName(e.target.value)}}/>
+        <input type="text" placeholder="Enter User name" value={name} onChange={(e)=>{setName(e.target.value)}} required/>
       </div>
-
       <div className="mb-3" controlId="exampleForm.ControlInput1">
         <label className="text-white">Password</label>
-        <input type="password" placeholder="Enter Strong Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+        <input type="password" placeholder="Enter Strong Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
       </div>
     
     </form>

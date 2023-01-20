@@ -47,7 +47,7 @@ function Modal({open,onClose}) {
 
   return (
       <>
-      <div style={MODAL_OVERLAY}/>
+      <div style={MODAL_OVERLAY} className='card'/>
     <div style={MODAL_STYLE}>
     <div className="mb-3">
             <label style={{fontSize:"27px"}}>Title</label><br></br>
@@ -57,7 +57,7 @@ function Modal({open,onClose}) {
             <label style={{fontSize:"27px"}}>Decription</label><br></br>
             <textarea as="textarea" rows={3} placeholder="Enter Description" value={desc} onChange={(e)=>{setDesc(e.target.value)}}/>
         </div>
-        <button className='btn btn-outline-danger' onClick={onClose} style={{marginRight:"10px"}}>Close</button>
+        <button className='btn btn-outline-danger' onClick={onClose} style={{marginRight:"20px"}}>Close</button>
         <button className='btn btn-outline-primary' onClick={AddData}>Add</button>
      
     </div>
