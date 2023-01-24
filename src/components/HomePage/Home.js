@@ -96,12 +96,12 @@ if (isLoading) {
         {newArray.map((post) => (
        <div style={{ width: '25rem'}} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
         <div class="card-body">
-            <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
-            <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
+            <h2 class="card-title" style={{color:"red"}}>{post?.title}</h2>
+            <h4 class="card-text" style={{color:"white"}}>{post?.description}</h4>
             <button className='btn btn-success upBtn m-3' disabled={isdisable} >👍</button>
-            <span style={{color:"white"}}>{post.upVote}</span>
+            <span style={{color:"white"}}>{post?.upVote}</span>
             <button className='btn btn-warning downBtn m-3' disabled={isdisable}>👎</button>
-            <span style={{color:"white"}}>{post.downVote}</span>  
+            <span style={{color:"white"}}>{post?.downVote}</span>  
         </div>
         </div>
 
