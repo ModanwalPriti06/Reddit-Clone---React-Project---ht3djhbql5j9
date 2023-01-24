@@ -28,10 +28,10 @@ function Modal({open,onClose}) {
     if(!open) return null;
 
     function AddData(){
-        var add=JSON.parse(localStorage.getItem('add')||'[]');
+        var add=JSON.parse(localStorage?.getItem('add')||'[]');
         var list={
           userId:add.length+1,
-          username:JSON.parse(localStorage.getItem("currentValue")).uname,
+          username:JSON.parse(localStorage?.getItem("currentValue")).uname,
           title:title,
           description:desc,
           upVote:0,
