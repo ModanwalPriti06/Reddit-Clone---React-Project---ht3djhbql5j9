@@ -10,7 +10,7 @@ const navigate=useNavigate();
 const[isdisable,setDisable]=useState(false);
 const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
-const parsed = JSON.parse(localStorage.getItem("add"))
+const parsed = JSON.parse(localStorage?.getItem("add"))
  let newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
 
 useEffect(() => {
