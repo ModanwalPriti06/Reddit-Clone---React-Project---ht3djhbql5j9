@@ -63,8 +63,8 @@ function AddPost() {
         
             <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark" key={index.userId}>
             <div class="card-body" >
-                <h2 class="card-title" style={{color:"white"}}>{e.title}</h2>
-                <h4 class="card-text" style={{color:"white"}}>{e.description}</h4>
+                <h2 class="card-title" style={{color:"white"}}>{e?.title}</h2>
+                <h4 class="card-text" style={{color:"white"}}>{e?.description}</h4>
                 <button className='btn btn-success upBtn m-3' onClick={upvote}>👍</button>
                 <span style={{color:"white"}}>{likes}</span>
                 <button className='btn btn-warning downBtn m-3' onClick={downvote}>👎</button>
