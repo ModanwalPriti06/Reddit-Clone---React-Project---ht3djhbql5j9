@@ -17,23 +17,21 @@ function AddPost() {
       
     function logout(){
       confirm("Now you are logout from this website..")
-     localStorage.setItem('currentValue', JSON.stringify({...JSON.parse(localStorage.getItem('currentValue')),
+     localStorage.setItem('currentValue', JSON.stringify({...JSON.parse(localStorage?.getItem('currentValue')),
       uname: ""}));
     
-      navigate('/home')
+      navigate('/')
     }
-    const filteredData = PostArray.filter(item => item.username === JSON.parse(localStorage.getItem("currentValue")).uname);
+    const filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
     
     function home(){
-      navigate('/home')
+      navigate('/')
   }
-  function allpost(){
-    navigate('/allpost')
-  }
+ 
 
     function upvote(){
       alert("like")
-      if(JSON.parse(localStorage.getItem("add")).userId===JSON.parse(localStorage.getItem("add")).userRegNo)
+      if(JSON.parse(localStorage.getItem("add"))?.userId===JSON.parse(localStorage.getItem("add")).userRegNo)
         {
           setLikes(likes+1)
         }
@@ -56,7 +54,7 @@ function AddPost() {
     <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={home} style={{width:"10rem"}}>Home</button>
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={()=>{setIsOpen(true)}} style={{width:"10rem"}}>Add Post</button>
-            <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={allpost} style={{width:"10rem"}}>All Local Post</button>
+  
             <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={logout} style={{width:"10rem"}}>LogOut</button>
         </div>
        

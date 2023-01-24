@@ -36,7 +36,7 @@ function Login() {
     navigate('/addpost')
   }
 function homepage(){
-  navigate('/home')
+  navigate('/')
 }
   return (
     <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}>

@@ -10,20 +10,43 @@ const navigate=useNavigate();
 const[isdisable,setDisable]=useState(false);
 const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
-//const [click,setClick]=useState(false)
+const parsed = JSON.parse(localStorage.getItem("add"))
+ let newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
 
 useEffect(() => {
   async function fetchData() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
     const json = await response.json();
-    setData(json);
+    let newArray=[...json.slice(0,5)];
+    newArray=newArray.map((item)=>{
+      return{
+        postId:item.id,
+        userId:0,
+        userName:"Priti",
+        title:item.title,
+        desc:item.body,
+        like:0,
+        dislike:0
+      }
+    })
+    console.log(newArray);
+    /*let abc=["a","b","c","e"];
+    console.log(abc);
+    abc.push("d");
+    console.log(abc);
+    abc.unshift("z");
+    console.log(abc);
+    console.log(newArray);*/
+    setData(json.slice(0,5));
     setIsLoading(false);
   }
   fetchData();
 },[]);
 
 useEffect(()=>{
-  if(JSON.parse(localStorage.getItem('currentValue')).uname==="")
+  console.log(localStorage.getItem('bnd')?.uname);
+  if(JSON.parse(localStorage.getItem('currentValue'))?.uname==="")
+
   setDisable(true);
   else{
     setDisable(false)
@@ -41,7 +64,7 @@ if (isLoading) {
         navigate('/login');
       }
       function addPost(){
-        if(JSON.parse(localStorage.getItem('currentValue')).uname!=="")
+        if(JSON.parse(localStorage.getItem('currentValue'))?.uname!=="")
         {
           navigate('/addpost');   
         }
@@ -69,6 +92,22 @@ if (isLoading) {
         onClick={addPost} style={{width:"12rem"}}>Add Post</button>   
       </div>
         <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Post</h1>
+      
+        {newArray.map((post) => (
+       <div style={{ width: '25rem'}} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
+        <div class="card-body">
+            <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
+            <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
+            <button className='btn btn-success upBtn m-3' disabled={isdisable} >👍</button>
+            <span style={{color:"white"}}>{post.upVote}</span>
+            <button className='btn btn-warning downBtn m-3' disabled={isdisable}>👎</button>
+            <span style={{color:"white"}}>{post.downVote}</span>  
+        </div>
+        </div>
+
+     ))};
+
+
        {data.map((post) => (
        <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
         <div class="card-body">
@@ -82,6 +121,7 @@ if (isLoading) {
         </div>
 
      ))};
+     
     <Footer/>
        
        </div>
