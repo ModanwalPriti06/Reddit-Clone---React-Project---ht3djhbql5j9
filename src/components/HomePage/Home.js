@@ -3,49 +3,46 @@ import { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
-
-
 function Home () {
+
 const navigate=useNavigate();
 const[isdisable,setDisable]=useState(false);
 const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const parsed = JSON.parse(localStorage?.getItem("add"))
  let newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
+let localCurValGet=JSON.parse(localStorage.getItem('currentValue'));
 
 useEffect(() => {
   async function fetchData() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
     const json = await response.json();
-    let newArray=[...json.slice(0,5)];
+    let newArray=[...json.slice(0,3)];
     newArray=newArray.map((item)=>{
+      
       return{
         postId:item.id,
-        userId:0,
-        userName:"Priti",
+        userId:1,
+        username:"Priti",
         title:item.title,
-        desc:item.body,
-        like:0,
-        dislike:0
+        description:item.body,
+        upVote:0,
+        downVote:0
       }
     })
-    console.log(newArray);
-    /*let abc=["a","b","c","e"];
-    console.log(abc);
-    abc.push("d");
-    console.log(abc);
-    abc.unshift("z");
-    console.log(abc);
-    console.log(newArray);*/
-    setData(json.slice(0,5));
+    setData(newArray);
+    var add=JSON.parse(localStorage?.getItem('add')||'[]');
+    newArray?.unshift(...add);
+   // console.log(newArray);
     setIsLoading(false);
+    
   }
   fetchData();
 },[]);
 
 useEffect(()=>{
-  console.log(localStorage.getItem('bnd')?.uname);
-  if(JSON.parse(localStorage.getItem('currentValue'))?.uname==="")
+  
+  if(localCurValGet?.uname==="")
 
   setDisable(true);
   else{
@@ -64,7 +61,7 @@ if (isLoading) {
         navigate('/login');
       }
       function addPost(){
-        if(JSON.parse(localStorage.getItem('currentValue'))?.uname!=="")
+        if(localCurValGet?.uname!=="")
         {
           navigate('/addpost');   
         }
@@ -78,7 +75,7 @@ if (isLoading) {
     <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}> 
       <div className='bg-dark header'>   
       <img
-        width={60}
+        width={60}card
         height={60}
         alt="logo"
         className='my-3 rounded'
@@ -87,36 +84,23 @@ if (isLoading) {
       />
         <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
         <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right login-btn"
-         onClick={login} style={{width:"8rem"}}>Login</button>
+         onClick={login} style={{width:"8rem"}}>Login 👤</button>
         <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" 
-        onClick={addPost} style={{width:"12rem"}}>Add Post</button>   
+        onClick={addPost} style={{width:"12rem"}}>Add Post 📝</button>   
       </div>
         <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Post</h1>
       
-        {newArray.map((post) => (
-       <div style={{ width: '25rem'}} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
-        <div class="card-body">
-            <h2 class="card-title" style={{color:"red"}}>{post?.title}</h2>
-            <h4 class="card-text" style={{color:"white"}}>{post?.description}</h4>
-            <button className='btn btn-success upBtn m-3' disabled={isdisable} >👍</button>
-            <span style={{color:"white"}}>{post?.upVote}</span>
-            <button className='btn btn-warning downBtn m-3' disabled={isdisable}>👎</button>
-            <span style={{color:"white"}}>{post?.downVote}</span>  
-        </div>
-        </div>
+     
 
-     ))};
-
-
-       {data.map((post) => (
-       <div style={{ width: '25rem' }} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
+       {data.map((post,idx) => (
+       <div style={{ width: '25rem'}} key={idx} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
         <div class="card-body">
             <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
-            <h4 class="card-text" style={{color:"white"}}>{post.body}</h4>
+            <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
             <button className='btn btn-success upBtn m-3' disabled={isdisable} >👍</button>
-            <span style={{color:"white"}}>4</span>
+            <span style={{color:"white"}}>{post.upVote}</span>
             <button className='btn btn-warning downBtn m-3' disabled={isdisable}>👎</button>
-            <span style={{color:"white"}}>0</span>  
+            <span style={{color:"white"}}>{post.downVote}</span>  
         </div>
         </div>
 

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import {useNavigate} from 'react-router-dom';
 
 const MODAL_STYLE={
     position:'fixed',
@@ -29,16 +27,20 @@ function Modal({open,onClose}) {
 
     function AddData(){
         var add=JSON.parse(localStorage?.getItem('add')||'[]');
+        const storedCurVal=JSON.parse(localStorage.getItem("currentValue"));
+        const storedAddVal=JSON.parse(localStorage.getItem("add"));
+        
+    
         var list={
-          userId:add.length+1,
-          username:JSON.parse(localStorage.getItem("currentValue"))?.uname,
+          postId:add.length+1,
+          userId:storedCurVal?.userId,
+          username:storedCurVal?.uname,
           title:title,
           description:desc,
           upVote:0,
           downVote:0,
-      
         }
-        add.push(list)
+        add.unshift(list)
         localStorage.setItem('add',JSON.stringify(add));
          setTitle("");
          setDesc("");
