@@ -48,7 +48,7 @@ function homepage(){
 }
   return (
     
-    <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}>
+    <div style={{backgroundColor:"#D7E9B9"}}>
       
      <div className='bg-dark'>
      <img
@@ -61,25 +61,32 @@ function homepage(){
       />
     <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
             
-     <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" onClick={homepage} style={{width:"8rem"}}>Home 🏠</button>
+     <button variant="light" className="btn btn-outline-danger m-3 p-3 align-items-right" onClick={homepage} style={{width:"8rem"}}>Home 🏠</button>
         </div>
-        <h1 className="text-center m-4">Login Here</h1>
-      <div body className="card mx-auto d-flex align-items-center mx-auto bg-dark m-5" style={{width:"28rem"}}>
+        <h1 className="text-center m-2">Login Here</h1>
+      <div body className="card mx-auto d-flex align-items-center mx-auto bg-dark m-3" style={{width:"28rem"}}>
       <div class="card-body">
       <form onSubmit={(e)=>{e.preventDefault()}}>
 
       <div className="mb-3 form-group" controlId="exampleForm.ControlInput1">
-        <label className="text-white">Username:</label>
-        <input type="text" placeholder="Enter User name" value={name} onChange={(e)=>{setName(e.target.value)}} required/>
+      <img
+        width={300}
+        height={200}
+        alt="logo"
+        style={{marginLeft:"10px",paddingLeft:"50px"}}
+        src="https://www.shahucollegelatur.org.in/Activity%20portal/img/login.gif"
+      /><br></br>
+        <label className="text-white"></label>
+        <input type="text" placeholder="Username" value={name} onChange={(e)=>{setName(e.target.value)}} required/>
       </div>
       <div className="mb-3" controlId="exampleForm.ControlInput1">
-        <label className="text-white">Password</label>
-        <input type="password" placeholder="Enter Strong Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
+        <label className="text-white"></label>
+        <input type="password" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
       </div>
 
     </form>
 
-    <button variant="light" className="btn btn-outline-primary" onClick={print} style={{width:"5rem"}}>Sign</button>
+    <button variant="light" className="btn btn-outline-primary mx-5" onClick={print} style={{width:"15rem"}}>Sign</button>
     </div>
     </div>
       <Footer/>

@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+const TITLE={
+    height:'60px',
+    width:'500px',
+    border:'none' ,
+    backgroundColor:'white',
+}
 
 const MODAL_STYLE={
     position:'fixed',
     top:'50%',
     left:'50%',
     transform:'translate(-50%,-50%)',
-    backgroundColor:'#FF7B54',
-    padding:'50px',
+    backgroundColor:'#D9ACF5',
+    padding:'100px',
     zIndex:1000
 }
 const MODAL_OVERLAY={
@@ -53,14 +59,14 @@ function Modal({open,onClose}) {
     <div style={MODAL_STYLE}>
     <div className="mb-3">
             <label style={{fontSize:"27px"}}>Title</label><br></br>
-            <textarea as="textarea" rows={1} placeholder="Enter Title Here" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
+            <textarea as="textarea" style={TITLE} rows={2} placeholder="Enter Title Here" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
         </div>
         <div className="mb-3">
             <label style={{fontSize:"27px"}}>Decription</label><br></br>
-            <textarea as="textarea" rows={3} placeholder="Enter Description" value={desc} onChange={(e)=>{setDesc(e.target.value)}}/>
+            <textarea as="textarea" style={TITLE} rows={4} placeholder="Enter Description" value={desc} onChange={(e)=>{setDesc(e.target.value)}}/>
         </div>
-        <button className='btn btn-outline-danger' onClick={onClose} style={{marginRight:"20px"}}>Close</button>
-        <button className='btn btn-outline-primary' onClick={AddData}>Add</button>
+        <button className='btn btn-outline-danger' onClick={onClose} style={{marginRight:"30px"}}>Close</button>
+        <button className='btn btn-outline-primary' onClick={AddData}> Add </button>
      
     </div>
     </>

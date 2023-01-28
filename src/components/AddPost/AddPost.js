@@ -63,7 +63,7 @@ function AddPost() {
       //setDisLikes(dlikes+1)
     }
   return (
-    <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}>
+    <div style={{backgroundColor:"#D7E9B9"}}>
          <div className='bg-dark'>
          <img
         width={60}
@@ -86,9 +86,9 @@ function AddPost() {
             <div class="card-body" >
                 <h2 class="card-title" style={{color:"white"}}>{e?.title}</h2>
                 <h4 class="card-text" style={{color:"white"}}>{e?.description}</h4>
-                <button className='btn btn-success upBtn m-3' id={e?.postId} onClick={upvote}>👍</button>
+                <button className='btn btn-warning upBtn m-3' id={e?.postId} onClick={upvote}>💖</button>
                 <span style={{color:"white"}}>{e?.upVote}</span>
-                <button className='btn btn-warning downBtn m-3' id={e?.postId} onClick={downvote}>👎</button>
+                <button className='btn btn-warning downBtn m-3' id={e?.postId} onClick={downvote}>💔</button>
                 <span style={{color:"white"}}>{e?.downVote}</span>
                
             </div>

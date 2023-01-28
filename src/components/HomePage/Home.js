@@ -53,7 +53,9 @@ useEffect(()=>{
 if (isLoading) {
   return (
     <div>
-  <h2 style={{color:"grey"}}>Loading...</h2>
+  <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" 
+  style={{marginLeft:"40rem",marginTop:"15rem"}}/>
+
   </div>
   );
 }
@@ -72,8 +74,8 @@ if (isLoading) {
     }
 
   return (
-    <div style={{backgroundImage:"linear-gradient(to right,white,tomato)"}}> 
-      <div className='bg-dark header'>   
+    <div style={{backgroundColor:"#D7E9B9"}}> 
+      <div className='header bg-dark'>   
       <img
         width={60}card
         height={60}
@@ -93,13 +95,13 @@ if (isLoading) {
      
 
        {data.map((post,idx) => (
-       <div style={{ width: '25rem'}} key={idx} className="d-flex align-items-center mx-auto bg-dark m-3 card" border="dark">
+       <div style={{ width: '25rem'}} key={idx} className="d-flex align-items-center bg-dark mx-auto m-3 card" border="dark">
         <div class="card-body">
             <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
             <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
-            <button className='btn btn-success upBtn m-3' disabled={isdisable} >👍</button>
+            <button className='btn btn-warning upBtn m-3' disabled={isdisable} >💖</button>
             <span style={{color:"white"}}>{post.upVote}</span>
-            <button className='btn btn-warning downBtn m-3' disabled={isdisable}>👎</button>
+            <button className='btn btn-warning downBtn m-3' disabled={isdisable}>💔</button>
             <span style={{color:"white"}}>{post.downVote}</span>  
         </div>
         </div>
