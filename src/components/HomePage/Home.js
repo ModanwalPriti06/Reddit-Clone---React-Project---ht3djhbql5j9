@@ -5,13 +5,15 @@ import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
 function Home () {
 
+  let newArray=[];
 const navigate=useNavigate();
 const[isdisable,setDisable]=useState(false);
 const [data, setData] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
-const parsed = JSON.parse(localStorage?.getItem("add"))
- let newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
-let localCurValGet=JSON.parse(localStorage.getItem('currentValue'));
+let parsed = JSON.parse(localStorage?.getItem("add"))
+newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
+let localCurValGet=JSON.parse(localStorage?.getItem('currentValue'));
+const [selectedId,setSelectedId]=useState(-99);
 
 useEffect(() => {
   async function fetchData() {
@@ -19,7 +21,7 @@ useEffect(() => {
     const json = await response.json();
     let newArray=[...json.slice(0,3)];
     newArray=newArray.map((item)=>{
-      
+
       return{
         postId:item.id,
         userId:1,
@@ -33,17 +35,13 @@ useEffect(() => {
     setData(newArray);
     var add=JSON.parse(localStorage?.getItem('add')||'[]');
     newArray?.unshift(...add);
-   // console.log(newArray);
     setIsLoading(false);
-    
   }
   fetchData();
 },[]);
 
 useEffect(()=>{
-  
   if(localCurValGet?.uname==="")
-
   setDisable(true);
   else{
     setDisable(false)
@@ -55,7 +53,6 @@ if (isLoading) {
     <div>
   <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" 
   style={{marginLeft:"40rem",marginTop:"15rem"}}/>
-
   </div>
   );
 }
@@ -72,7 +69,51 @@ if (isLoading) {
           navigate('/login');
         }  
     }
+  /* useEffect(()=>{
+    //if(selectedId!== -99){
+    console.log("hello");
+   /* setSelectedId(-99);
+     parsed = JSON.parse(localStorage?.getItem("add"))
+  newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
+    //filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
+    }
+  },[selectedId])*/
 
+    function upvote(e){
+      let post = JSON.parse(localStorage?.getItem('add'));
+      let btnId=e.target.id; 
+     
+      for(let i=0;i<post.length;i++){
+          //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")} 
+          let comp=post[i].postId==btnId;
+          if(comp){
+            post[i].upVote+=1;
+            localStorage.setItem("add", JSON.stringify(post));
+           console.log("success");          
+          } 
+    }
+    setSelectedId(btnId);
+      alert("like..😍")
+     
+    }
+    function downvote(e){
+      let post = JSON.parse(localStorage.getItem('add'));
+      let btnId=e.target.id; 
+     
+      for(let i=0;i<post.length;i++){
+          //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")} 
+          let comp=post[i].postId==btnId;
+          if(comp){
+            post[i].downVote+=1;
+            localStorage.setItem("add", JSON.stringify(post));
+           console.log("success");
+            console.log(btnId);
+          
+          } 
+    }
+      alert("Down Vote..😏")
+    setSelectedId(btnId);
+    }
   return (
     <div style={{backgroundColor:"#D7E9B9"}}> 
       <div className='header bg-dark'>   
@@ -91,27 +132,21 @@ if (isLoading) {
         onClick={addPost} style={{width:"12rem"}}>Add Post 📝</button>   
       </div>
         <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Post</h1>
-      
-     
-
        {data.map((post,idx) => (
        <div style={{ width: '25rem'}} key={idx} className="d-flex align-items-center bg-dark mx-auto m-3 card" border="dark">
         <div class="card-body">
             <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
             <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
-            <button className='btn btn-warning upBtn m-3' disabled={isdisable} >💖</button>
+            <button className='btn btn-warning upBtn m-3' id={post.postId} disabled={isdisable} onClick={upvote}>💖</button>
             <span style={{color:"white"}}>{post.upVote}</span>
-            <button className='btn btn-warning downBtn m-3' disabled={isdisable}>💔</button>
+            <button className='btn btn-warning downBtn m-3' id={post.postId} disabled={isdisable} onClick={downvote}>💔</button>
             <span style={{color:"white"}}>{post.downVote}</span>  
         </div>
         </div>
 
-     ))};
-     
-    <Footer/>
-       
+     ))};   
+    <Footer/>   
        </div>
-
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {useNavigate} from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Modal from './Modal';
@@ -8,8 +8,9 @@ let PostArray=[];
 function AddPost() {
     const navigate=useNavigate();
     const [isopen,setIsOpen]=useState(false);
+    const [selectedId,setSelectedId]=useState(-99);
   
-    const storedAddVal = JSON.parse(localStorage.getItem("add"));
+    let storedAddVal = JSON.parse(localStorage.getItem("add"));
 
     PostArray = Array.isArray(storedAddVal) ? [...storedAddVal] : [storedAddVal]
       
@@ -20,11 +21,20 @@ function AddPost() {
     
       navigate('/')
     }
-    const filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
+    let filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
     
     function home(){
       navigate('/')
   }
+  useEffect(()=>{
+    if(selectedId!== -99){
+    console.log("hello");
+    setSelectedId(-99);
+    storedAddVal = JSON.parse(localStorage.getItem("add"));
+    PostArray = Array.isArray(storedAddVal) ? [...storedAddVal] : [storedAddVal]
+    filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
+    }
+  },[selectedId])
  
     function upvote(e){
       let post = JSON.parse(localStorage.getItem('add'));
@@ -41,6 +51,7 @@ function AddPost() {
           
           } 
     }
+    setSelectedId(btnId);
       alert("like..😍")
      
     }
@@ -59,8 +70,9 @@ function AddPost() {
           
           } 
     }
+    
       alert("Down Vote..😏")
-      //setDisLikes(dlikes+1)
+    setSelectedId(btnId);
     }
   return (
     <div style={{backgroundColor:"#D7E9B9"}}>

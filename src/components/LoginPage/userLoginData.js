@@ -1,28 +1,28 @@
 let userLoginData=[
     {
-        userName:'Priti1',
+        userName:'user1',
         userId:1,
-        userPass:12345
+        userPass:1
     },
     {
-        userName:'Priti2',
+        userName:'user2',
         userId:2,
-        userPass:1234
+        userPass:12
     },
     {
-        userName:'Priti3',
+        userName:'user3',
         userId:3,
         userPass:123
     },
     {
-        userName:'Priti4',
+        userName:'user4',
         userId:4,
-        userPass:12
+        userPass:1234
     },
     {
-        userName:'Priti5',
+        userName:'user5',
         userId:5,
-        userPass:11
+        userPass:12345
     },
 ];
 
