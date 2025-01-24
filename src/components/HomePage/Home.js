@@ -84,7 +84,7 @@ function Home() {
       }
     }
     setSelectedId(btnId);
-    alert("like..😍");
+    // alert("like..😍");
   }
   function downvote(e) {
     let post = JSON.parse(localStorage.getItem("add"));
@@ -100,7 +100,7 @@ function Home() {
         console.log(btnId);
       }
     }
-    alert("Down Vote..😏");
+    // alert("Down Vote..😏");
     setSelectedId(btnId);
   }
   return (
@@ -140,11 +140,6 @@ function Home() {
             Reddit
           </span>
         </div>
-        {/* <div>
-          <h1 style={{ color: "white" }}>
-             All Post
-          </h1>
-        </div> */}
         <div style={{ display: "flex", gap: "5px" }}>
           <button
             variant="light"
@@ -195,6 +190,7 @@ function Home() {
         </div>
       </div>
 
+      <h3 className="text-center m-2" style={{color:'Black'}}>All Post</h3>
       {data.map((post, idx) => (
         <div
           style={{ width: "20rem" }}

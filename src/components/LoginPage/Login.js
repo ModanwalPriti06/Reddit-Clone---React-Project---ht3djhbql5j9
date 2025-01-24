@@ -42,9 +42,7 @@ function Login() {
   }
   return (
     <>
-      <div
-        style={{ backgroundColor: "#D7E9B9", height: "100%", width: "100%" }}
-      >
+      <div style={{ backgroundColor: "#D7E9B9", height: "94vh" }}>
         <div
           className="bg-dark"
           style={{
@@ -105,7 +103,7 @@ function Login() {
             </button>
           </div>
         </div>
-        <h1 className="text-center m-2">Login Here</h1>
+        <h3 className="text-center m-2">Login Here</h3>
         <div
           body
           className="card mx-auto d-flex align-items-center mx-auto bg-dark m-3"
