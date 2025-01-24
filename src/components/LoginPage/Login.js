@@ -127,7 +127,7 @@ function Login() {
                   src="https://www.shahucollegelatur.org.in/Activity%20portal/img/login.gif"
                 />
                 <br></br>
-                <label className="text-white"></label>
+                <label className="text-white mx-3"></label>
                 <input
                   type="text"
                   placeholder="Username"
@@ -139,7 +139,7 @@ function Login() {
                 />
               </div>
               <div className="mb-3" controlId="exampleForm.ControlInput1">
-                <label className="text-white"></label>
+                <label className="text-white mx-3"></label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -156,7 +156,7 @@ function Login() {
               variant="light"
               className="btn btn-outline-primary mx-5"
               onClick={print}
-              style={{ width: "15rem" }}
+              style={{ width: "16rem" }}
             >
               Sign
             </button>
