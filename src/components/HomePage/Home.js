@@ -1,153 +1,264 @@
-import React from 'react';
-import { useState,useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {useNavigate} from 'react-router-dom';
-import Footer from '../Footer/Footer';
-function Home () {
+import React from "react";
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import "./Home.css";
+function Home() {
+  let newArray = [];
+  const navigate = useNavigate();
+  const [isdisable, setDisable] = useState(false);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  let parsed = JSON.parse(localStorage?.getItem("add"));
+  newArray = Array.isArray(parsed) ? [...parsed] : [parsed];
+  let localCurValGet = JSON.parse(localStorage?.getItem("currentValue"));
+  const [selectedId, setSelectedId] = useState(-99);
 
-  let newArray=[];
-const navigate=useNavigate();
-const[isdisable,setDisable]=useState(false);
-const [data, setData] = useState([]);
-const [isLoading, setIsLoading] = useState(true);
-let parsed = JSON.parse(localStorage?.getItem("add"))
-newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
-let localCurValGet=JSON.parse(localStorage?.getItem('currentValue'));
-const [selectedId,setSelectedId]=useState(-99);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      const json = await response.json();
+      let newArray = [...json.slice(0, 3)];
+      newArray = newArray.map((item) => {
+        return {
+          postId: item.id,
+          userId: 1,
+          username: "Priti",
+          title: item.title,
+          description: item.body,
+          upVote: 0,
+          downVote: 0,
+        };
+      });
+      setData(newArray);
+      var add = JSON.parse(localStorage?.getItem("add") || "[]");
+      newArray?.unshift(...add);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
-useEffect(() => {
-  async function fetchData() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const json = await response.json();
-    let newArray=[...json.slice(0,3)];
-    newArray=newArray.map((item)=>{
+  useEffect(() => {
+    if (localCurValGet?.uname === "") setDisable(true);
+    else {
+      setDisable(false);
+    }
+  }, []);
 
-      return{
-        postId:item.id,
-        userId:1,
-        username:"Priti",
-        title:item.title,
-        description:item.body,
-        upVote:0,
-        downVote:0
+  if (isLoading) {
+    return (
+      <div>
+        <img
+          src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+          style={{ marginLeft: "40rem", marginTop: "15rem" }}
+        />
+      </div>
+    );
+  }
+  function login() {
+    navigate("/login");
+  }
+  function addPost() {
+    if (localCurValGet?.uname !== "") {
+      navigate("/addpost");
+    } else {
+      alert("Sorry You are not login");
+      navigate("/login");
+    }
+  }
+
+  function upvote(e) {
+    let post = JSON.parse(localStorage?.getItem("add"));
+    let btnId = e.target.id;
+
+    for (let i = 0; i < post.length; i++) {
+      //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")}
+      let comp = post[i].postId == btnId;
+      if (comp) {
+        post[i].upVote += 1;
+        localStorage.setItem("add", JSON.stringify(post));
+        console.log("success");
       }
-    })
-    setData(newArray);
-    var add=JSON.parse(localStorage?.getItem('add')||'[]');
-    newArray?.unshift(...add);
-    setIsLoading(false);
+    }
+    setSelectedId(btnId);
+    alert("like..😍");
   }
-  fetchData();
-},[]);
+  function downvote(e) {
+    let post = JSON.parse(localStorage.getItem("add"));
+    let btnId = e.target.id;
 
-useEffect(()=>{
-  if(localCurValGet?.uname==="")
-  setDisable(true);
-  else{
-    setDisable(false)
+    for (let i = 0; i < post.length; i++) {
+      //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")}
+      let comp = post[i].postId == btnId;
+      if (comp) {
+        post[i].downVote += 1;
+        localStorage.setItem("add", JSON.stringify(post));
+        console.log("success");
+        console.log(btnId);
+      }
+    }
+    alert("Down Vote..😏");
+    setSelectedId(btnId);
   }
-},[])
-
-if (isLoading) {
   return (
-    <div>
-  <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" 
-  style={{marginLeft:"40rem",marginTop:"15rem"}}/>
-  </div>
+    <div style={{ backgroundColor: "#D7E9B9" }}>
+      <div
+        className="header bg-dark"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <img
+            width={50}
+            card
+            height={50}
+            alt="logo"
+            className="my-3 rounded"
+            style={{ marginLeft: "10px" }}
+            src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
+          />
+          <span
+            style={{
+              fontSize: "30px",
+              fontWeight: "bold",
+              color: "white",
+              marginLeft: "5px",
+            }}
+          >
+            Reddit
+          </span>
+        </div>
+        {/* <div>
+          <h1 style={{ color: "white" }}>
+             All Post
+          </h1>
+        </div> */}
+        <div style={{ display: "flex", gap: "5px" }}>
+          <button
+            variant="light"
+            className="btn btn-outline-danger login-btn"
+            onClick={login}
+            style={{ width: "6rem" }}
+          >
+            Login{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+              style={{ width: "24px", height: "24px" }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+          </button>
+          <button
+            variant="light"
+            className="btn btn-outline-danger"
+            onClick={addPost}
+            style={{ width: "8rem" }}
+          >
+            Add Post{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+              style={{ width: "24px", height: "24px" }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {data.map((post, idx) => (
+        <div
+          style={{ width: "20rem" }}
+          key={idx}
+          className="d-flex bg-dark mx-auto m-3 card"
+          border="dark"
+        >
+          <div class="card-body" style={{ width: "20rem" }}>
+            <h4 class="card-title" style={{ color: "tomato" }}>
+              {post.title}
+            </h4>
+            <h6 class="card-text" style={{ color: "white" }}>
+              {post.description}
+            </h6>
+            <button
+              className="btn btn-warning upBtn m-3"
+              id={post.postId}
+              disabled={isdisable}
+              onClick={upvote}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
+                />
+              </svg>
+            </button>
+            <span style={{ color: "white" }}>{post.upVote}</span>
+            <button
+              className="btn btn-warning downBtn m-3"
+              id={post.postId}
+              disabled={isdisable}
+              onClick={downvote}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54"
+                />
+              </svg>
+            </button>
+            <span style={{ color: "white" }}>{post.downVote}</span>
+          </div>
+        </div>
+      ))}
+      <Footer />
+    </div>
   );
 }
-      function login(){
-        navigate('/login');
-      }
-      function addPost(){
-        if(localCurValGet?.uname!=="")
-        {
-          navigate('/addpost');   
-        }
-        else{
-          alert("Sorry You are not login")
-          navigate('/login');
-        }  
-    }
-  /* useEffect(()=>{
-    //if(selectedId!== -99){
-    console.log("hello");
-   /* setSelectedId(-99);
-     parsed = JSON.parse(localStorage?.getItem("add"))
-  newArray = Array.isArray(parsed) ? [...parsed] : [parsed]
-    //filteredData = PostArray.filter(item => item?.username === JSON.parse(localStorage.getItem("currentValue"))?.uname);
-    }
-  },[selectedId])*/
 
-    function upvote(e){
-      let post = JSON.parse(localStorage?.getItem('add'));
-      let btnId=e.target.id; 
-     
-      for(let i=0;i<post.length;i++){
-          //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")} 
-          let comp=post[i].postId==btnId;
-          if(comp){
-            post[i].upVote+=1;
-            localStorage.setItem("add", JSON.stringify(post));
-           console.log("success");          
-          } 
-    }
-    setSelectedId(btnId);
-      alert("like..😍")
-     
-    }
-    function downvote(e){
-      let post = JSON.parse(localStorage.getItem('add'));
-      let btnId=e.target.id; 
-     
-      for(let i=0;i<post.length;i++){
-          //{(post[i].postId==btnId)?console.log(btnId):console.log("fail")} 
-          let comp=post[i].postId==btnId;
-          if(comp){
-            post[i].downVote+=1;
-            localStorage.setItem("add", JSON.stringify(post));
-           console.log("success");
-            console.log(btnId);
-          
-          } 
-    }
-      alert("Down Vote..😏")
-    setSelectedId(btnId);
-    }
-  return (
-    <div style={{backgroundColor:"#D7E9B9"}}> 
-      <div className='header bg-dark'>   
-      <img
-        width={60}card
-        height={60}
-        alt="logo"
-        className='my-3 rounded'
-        style={{marginLeft:"10px"}}
-        src="https://user-images.githubusercontent.com/33750251/59486444-3699ab80-8e71-11e9-9f9a-836e431dcbfd.png"
-      />
-        <span style={{fontSize:"30px",fontWeight:"bold",color:"white"}}>Reddit</span>
-        <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right login-btn"
-         onClick={login} style={{width:"8rem"}}>Login 👤</button>
-        <button variant="light" className="btn btn-outline-danger m-2 p-3 align-items-right" 
-        onClick={addPost} style={{width:"12rem"}}>Add Post 📝</button>   
-      </div>
-        <h1 className="text-center" style={{fontFamily:"fantasy"}}>Our All Post</h1>
-       {data.map((post,idx) => (
-       <div style={{ width: '25rem'}} key={idx} className="d-flex align-items-center bg-dark mx-auto m-3 card" border="dark">
-        <div class="card-body">
-            <h2 class="card-title" style={{color:"red"}}>{post.title}</h2>
-            <h4 class="card-text" style={{color:"white"}}>{post.description}</h4>
-            <button className='btn btn-warning upBtn m-3' id={post.postId} disabled={isdisable} onClick={upvote}>💖</button>
-            <span style={{color:"white"}}>{post.upVote}</span>
-            <button className='btn btn-warning downBtn m-3' id={post.postId} disabled={isdisable} onClick={downvote}>💔</button>
-            <span style={{color:"white"}}>{post.downVote}</span>  
-        </div>
-        </div>
-
-     ))};   
-    <Footer/>   
-       </div>
-  )
-}
-
-export default Home
+export default Home;
