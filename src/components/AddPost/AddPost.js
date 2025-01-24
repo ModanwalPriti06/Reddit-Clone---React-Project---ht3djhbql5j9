@@ -204,12 +204,12 @@ function AddPost() {
             key={index + 1}
           >
             <div class="card-body">
-              <h2 class="card-title" style={{ color: "white" }}>
+              <h4 class="card-title" style={{ color: "white" }}>
                 {e?.title}
-              </h2>
-              <h4 class="card-text" style={{ color: "white" }}>
-                {e?.description}
               </h4>
+              <h6 class="card-text" style={{ color: "white" }}>
+                {e?.description}
+              </h6>
               <button
                 className="btn btn-warning upBtn m-3"
                 id={e?.postId}
